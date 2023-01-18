@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +25,13 @@ public class WordDaoJpaRepositoryImpl implements WordDao {
     @Override
     public List<Word> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Word> findAll(Pageable pageable) {
+        return repository
+                .findAll(pageable)
+                .getContent();
     }
 
     @Override

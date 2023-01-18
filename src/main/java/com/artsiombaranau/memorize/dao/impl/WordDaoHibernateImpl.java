@@ -8,6 +8,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +25,16 @@ public class WordDaoHibernateImpl implements WordDao {
     public List<Word> findAll() {
         try (EntityManager entityManager = getEntityManager()) {
             TypedQuery<Word> query = entityManager.createNamedQuery("word_find_all", Word.class);
+            return query.getResultList();
+        }
+    }
+
+    @Override
+    public List<Word> findAll(Pageable pageable) {
+        try (EntityManager entityManager = getEntityManager()) {
+            TypedQuery<Word> query = entityManager.createNamedQuery("word_find_all", Word.class);
+            query.setFirstResult(Math.toIntExact(pageable.getOffset()));
+            query.setMaxResults(pageable.getPageSize());
             return query.getResultList();
         }
     }
