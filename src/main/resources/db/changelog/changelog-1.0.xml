@@ -10,7 +10,7 @@
             </not>
         </preConditions>
         <createTable tableName="WORD">
-            <column name="ID" type="UUID">
+            <column name="ID" type="UUID" autoIncrement="false">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_2"/>
             </column>
             <column name="PART_OF_SPEECH" type="VARCHAR(255)"/>

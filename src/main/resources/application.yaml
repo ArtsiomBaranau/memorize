@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/memorize
+    url: jdbc:h2:file:~/memorize;MODE=LEGACY;NON_KEYWORDS=VALUE
     username: username
     password: password
   jpa:
