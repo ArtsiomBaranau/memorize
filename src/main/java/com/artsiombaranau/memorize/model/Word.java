@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.UUID;
 
@@ -13,6 +14,11 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
+@NamedQueries({
+        @NamedQuery(name = "word_find_all", query = "FROM Word"),
+        @NamedQuery(name = "word_find_by_value", query = "FROM Word w WHERE w.value = :value")
+})
 public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
