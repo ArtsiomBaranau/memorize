@@ -4,6 +4,7 @@ import com.artsiombaranau.memorize.dao.WordDao;
 import com.artsiombaranau.memorize.mapper.WordMapper;
 import com.artsiombaranau.memorize.model.Word;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Component
 @RequiredArgsConstructor
 public class WordDaoJdbcTemplateImpl implements WordDao {
     private final JdbcTemplate jdbcTemplate;
@@ -19,6 +21,11 @@ public class WordDaoJdbcTemplateImpl implements WordDao {
     @Override
     public List<Word> findAll() {
         return jdbcTemplate.queryForList("SELECT * FROM WORD", Word.class);
+    }
+
+    @Override
+    public List<Word> findAll(Pageable pageable) {
+        return jdbcTemplate.queryForList("SELECT * FROM WORD limit ? offset ?", Word.class, pageable.getPageSize(), pageable.getOffset());
     }
 
     @Override
