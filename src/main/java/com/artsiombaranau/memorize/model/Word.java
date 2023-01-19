@@ -6,7 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Data
@@ -30,6 +33,12 @@ public class Word {
 
     @Enumerated(value = EnumType.STRING)
     private PartOfSpeech partOfSpeech;
+
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Timestamp createdAt;
+    @UpdateTimestamp
+    private Timestamp modifiedAt;
 
     public enum PartOfSpeech {
         VERB("Verb"), NOUN("Noun"), ADJECTIVE("Adjective"), DETERMINER("Determiner"), ADVERB("Adverb"), PRONOUN("Pronoun"), PREPOSITION("Preposition"), CONJUNCTION("Conjunction"), INTERJECTION("Interjection");
