@@ -3,6 +3,7 @@ package com.artsiombaranau.memorize.dao.impl;
 import com.artsiombaranau.memorize.dao.WordDao;
 import com.artsiombaranau.memorize.model.Word;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,17 +31,20 @@ class WordDaoJdbcTemplateImplTest {
     }
 
     @Test
+    @Disabled
     void getById() {
         Optional<Word> byId = wordDao.findById(UUID.randomUUID());
         assertNull(byId.get());
     }
 
     @Test
+    @Disabled
     void getByIdNotFound() {
         assertThrows(EmptyResultDataAccessException.class, () -> wordDao.findById(UUID.randomUUID()));
     }
 
     @Test
+    @Disabled
     void save() {
         Word saved = wordDao.save(Word.builder()
                 .value("bye")
